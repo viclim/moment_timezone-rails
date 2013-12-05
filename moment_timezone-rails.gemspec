@@ -19,5 +19,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "rails", "~> 3.2.11"
-  spec.add_development_dependency "momentjs-rails", "~> 2.1.0"
+
+  spec.add_runtime_dependency "momentjs-rails", "~> 2.1.0"
 end
