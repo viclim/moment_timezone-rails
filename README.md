@@ -1,6 +1,8 @@
+moment_timezone-rails
+=====================
 # MomentTimezone::Rails
 
-TODO: Write a gem description
+moment timezone for Rails
 
 ## Installation
 
