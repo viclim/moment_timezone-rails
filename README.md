@@ -1,6 +1,6 @@
 # moment_timezone-rails
 
-moment timezone for Rails
+[moment-timezone](http://momentjs.com/timezone/) for Rails
 
 ## Installation
 
