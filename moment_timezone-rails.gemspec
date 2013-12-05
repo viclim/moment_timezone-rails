@@ -7,9 +7,9 @@ Gem::Specification.new do |spec|
   spec.name          = "moment_timezone-rails"
   spec.version       = MomentTimezone::Rails::VERSION
   spec.authors       = ["Lim Victor"]
-  spec.email         = ["lim.victor@mindvalley.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.email         = ["github.victor@gmail.com"]
+  spec.description   = "moment-timezone for Rails"
+  spec.summary       = "moment-timezone-#{MomentTimezone::Rails::VERSION}"
   spec.homepage      = ""
   spec.license       = "MIT"
 
@@ -18,6 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.3"
+  spec.add_development_dependency "rails", "~> 3.2.11"
+  spec.add_development_dependency "momentjs-rails", "~> 2.1.0"
   spec.add_development_dependency "rake"
 end

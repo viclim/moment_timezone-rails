@@ -1,7 +1,7 @@
-require "moment_timezone/rails/version"
-
 module MomentTimezone
   module Rails
-    # Your code goes here...
+    class Engine < ::Rails::Engine
+      # Get rails to add app, lib and vendor to load path
+    end
   end
 end
