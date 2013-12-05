@@ -1,6 +1,4 @@
-moment_timezone-rails
-=====================
-# MomentTimezone::Rails
+# moment_timezone-rails
 
 moment timezone for Rails
 
