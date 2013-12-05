@@ -4,21 +4,39 @@
 
 ## Installation
 
+Add this line if your application don't have momentjs installed:
+
+```ruby
+gem 'momentjs-rails', '~> 2.1.0'
+```
+
 Add this line to your application's Gemfile:
 
-    gem 'moment_timezone-rails'
+```ruby
+gem 'moment_timezone-rails'
+```
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install moment_timezone-rails
+```sh
+$ gem install moment_timezone-rails
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the following directives to `application.js`.
+
+```js
+//= require moment
+//= require moment-timezone
+//= require moment-timezone-data
+```
 
 ## Contributing
 
