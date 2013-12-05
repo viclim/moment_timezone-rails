@@ -4,7 +4,13 @@
 
 ## Installation
 
-Add this line to your application's Gemfile:
+For some reason, `momentjs-rails` need to be explicitly included in your application's Gemfile:
+
+```ruby
+gem 'momentjs-rails'
+```
+
+Then add this line to your application's Gemfile:
 
 ```ruby
 gem 'moment_timezone-rails'
