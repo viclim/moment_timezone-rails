@@ -5,7 +5,7 @@ require 'moment_timezone/rails/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "moment_timezone-rails"
-  spec.version       = MomentTimezone::Rails::VERSION
+  spec.version       = "#{MomentTimezone::Rails::VERSION}.2"
   spec.authors       = ["Lim Victor"]
   spec.email         = ["github.victor@gmail.com"]
   spec.description   = "moment-timezone for Rails"
