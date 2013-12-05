@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["github.victor@gmail.com"]
   spec.description   = "moment-timezone for Rails"
   spec.summary       = "moment-timezone-#{MomentTimezone::Rails::VERSION}"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/viclim/moment_timezone-rails"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -20,5 +20,4 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rails", "~> 3.2.11"
   spec.add_development_dependency "momentjs-rails", "~> 2.1.0"
-  spec.add_development_dependency "rake"
 end
