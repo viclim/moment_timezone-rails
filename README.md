@@ -4,12 +4,6 @@
 
 ## Installation
 
-Add this line if your application don't have momentjs installed:
-
-```ruby
-gem 'momentjs-rails', '~> 2.1.0'
-```
-
 Add this line to your application's Gemfile:
 
 ```ruby
