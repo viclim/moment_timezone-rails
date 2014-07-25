@@ -4,7 +4,7 @@
 
 ## Installation
 
-For some reason, `momentjs-rails` need to be explicitly included in your application's Gemfile:
+`momentjs-rails` need to be explicitly included in your application's Gemfile:
 
 ```ruby
 gem 'momentjs-rails'
