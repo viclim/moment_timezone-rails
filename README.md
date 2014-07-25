@@ -32,10 +32,28 @@ $ gem install moment_timezone-rails
 
 Add the following directives to `application.js`.
 
+### For v0.0.4 and below
+
 ```js
 //= require moment
 //= require moment-timezone
 //= require moment-timezone-data
+```
+
+### For v0.1.0
+
+```js
+//= require moment
+
+// moment-timezone without timezone data
+//= require moment-timezone
+
+// moment-timezone with timezone data from 2010-2020
+//= require moment-timezone-2010-2020
+
+// moment-timezone all timezone data
+//= require moment-timezone-all-years
+
 ```
 
 ## Contributing
