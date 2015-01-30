@@ -1,5 +1,5 @@
 //! moment-timezone.js
-//! version : 0.2.2
+//! version : 0.3.0
 //! author : Tim Wood
 //! license : MIT
 //! github.com/moment/moment-timezone
@@ -21,7 +21,7 @@
 	// Do not load moment-timezone a second time.
 	if (moment.tz !== undefined) { return moment; }
 
-	var VERSION = "0.2.2",
+	var VERSION = "0.3.0",
 		zones = {},
 		links = {},
 
@@ -302,13 +302,13 @@
 		moment.tz namespace
 	************************************/
 
-	function tz () {
+	function tz (input) {
 		var args = Array.prototype.slice.call(arguments, 0, -1),
 			name = arguments[arguments.length - 1],
 			zone = getZone(name),
 			out  = moment.utc.apply(null, args);
 
-		if (zone && needsOffset(out)) {
+		if (zone && !moment.isMoment(input) && needsOffset(out)) {
 			out.add(zone.parse(out), 'minutes');
 		}
 
@@ -342,14 +342,23 @@
 
 	moment.tz = tz;
 
+	moment.defaultZone = null;
+
 	moment.updateOffset = function (mom, keepTime) {
 		var offset;
+		if (mom._z === undefined) {
+			mom._z = moment.defaultZone;
+		}
 		if (mom._z) {
 			offset = mom._z.offset(mom);
 			if (Math.abs(offset) < 16) {
 				offset = offset / 60;
 			}
-			mom.zone(offset, keepTime);
+			if (mom.utcOffset !== undefined) {
+				mom.utcOffset(-offset, keepTime);
+			} else {
+				mom.zone(offset, keepTime);
+			}
 		}
 	};
 
@@ -384,6 +393,14 @@
 	fn.zoneAbbr = abbrWrap(fn.zoneAbbr);
 	fn.utc      = resetZoneWrap(fn.utc);
 
+	moment.tz.setDefault = function(name) {
+		if (major < 2 || (major === 2 && minor < 9)) {
+			logError('Moment Timezone setDefault() requires Moment.js >= 2.9.0. You are using Moment.js ' + moment.version + '.');
+		}
+		moment.defaultZone = name ? getZone(name) : null;
+		return moment;
+	};
+
 	// Cloning a moment should include the _z property.
 	var momentProperties = moment.momentProperties;
 	if (Object.prototype.toString.call(momentProperties) === '[object Array]') {
@@ -396,7 +413,7 @@
 	}
 
 	loadData({
-		"version": "2014g",
+		"version": "2014j",
 		"zones": [
 			"Africa/Abidjan|GMT|0|0|",
 			"Africa/Addis_Ababa|EAT|-30|0|",
@@ -436,7 +453,7 @@
 			"America/Glace_Bay|AST ADT|40 30|01010101010101010101010|1BQS0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0",
 			"America/Godthab|WGT WGST|30 20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00",
 			"America/Goose_Bay|AST ADT|40 30|01010101010101010101010|1BQQ1 1zb0 Op0 1zcX Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Rd0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0",
-			"America/Grand_Turk|EST EDT AST|50 40 40|01010101012|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0",
+			"America/Grand_Turk|EST EDT AST|50 40 40|0101010101012|1BQT0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0 Op0 1zb0",
 			"America/Guayaquil|ECT|50|0|",
 			"America/Guyana|GYT|40|0|",
 			"America/Havana|CST CDT|50 40|01010101010101010101010|1BQR0 1wo0 U00 1zc0 U00 1qM0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Rc0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0 Oo0 1zc0",
@@ -570,7 +587,7 @@
 			"Etc/UTC|UTC|0|0|",
 			"Europe/Belfast|GMT BST|0 -10|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00",
 			"Europe/Kaliningrad|EET EEST FET|-20 -30 -30|01020|1BWo0 1qM0 WM0 8Hz0",
-			"Europe/Minsk|EET EEST FET|-20 -30 -30|0102|1BWo0 1qM0 WM0",
+			"Europe/Minsk|EET EEST FET MSK|-20 -30 -30 -30|01023|1BWo0 1qM0 WM0 8Hy0",
 			"Europe/Moscow|MSK MSD MSK|-30 -40 -40|01020|1BWn0 1qM0 WM0 8Hz0",
 			"Europe/Samara|SAMT SAMST SAMT|-40 -40 -30|0120|1BWm0 1qN0 WM0",
 			"Europe/Simferopol|EET EEST MSK MSK|-20 -30 -40 -30|01010101023|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11z0 1nW0",
@@ -588,11 +605,12 @@
 			"MET|MET MEST|-10 -20|01010101010101010101010|1BWp0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00 11A0 1o00 11A0 1qM0 WM0 1qM0 WM0 1qM0 11A0 1o00 11A0 1o00",
 			"NZ-CHAT|CHADT CHAST|-dJ -cJ|01010101010101010101010|1C120 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00",
 			"Pacific/Apia|SST SDT WSDT WSST|b0 a0 -e0 -d0|01012323232323232323232|1Dbn0 1ff0 1a00 CI0 AQ0 1cM0 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1a00 1fA0 1cM0 1fA0 1a00 1fA0 1a00",
+			"Pacific/Bougainville|PGT BST|-a0 -b0|01|1NwE0",
 			"Pacific/Chuuk|CHUT|-a0|0|",
 			"Pacific/Efate|VUT|-b0|0|",
 			"Pacific/Enderbury|PHOT|-d0|0|",
 			"Pacific/Fakaofo|TKT TKT|b0 -d0|01|1Gfn0",
-			"Pacific/Fiji|FJST FJT|-d0 -c0|01010101010101010101010|1BWe0 1o00 Rc0 1wo0 Ao0 1Nc0 Ao0 1Q00 xz0 1Q10 xz0 1Q10 An0 1Nd0 An0 1Nd0 An0 1Nd0 An0 1Q10 xz0 1Q10",
+			"Pacific/Fiji|FJST FJT|-d0 -c0|01010101010101010101010|1BWe0 1o00 Rc0 1wo0 Ao0 1Nc0 Ao0 1Q00 xz0 1SN0 uM0 1SM0 xA0 1SM0 uM0 1SM0 uM0 1SM0 uM0 1SM0 uM0 1SM0",
 			"Pacific/Funafuti|TVT|-c0|0|",
 			"Pacific/Galapagos|GALT|60|0|",
 			"Pacific/Gambier|GAMT|90|0|",
