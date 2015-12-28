@@ -32,7 +32,7 @@ $ gem install moment_timezone-rails
 
 Add the following directives to `application.js`.
 
-### For v0.2.2 and up (latest version is 0.4.0)
+### For v0.2.2 and up (latest version is 0.5.0)
 
 ```js
 //= require moment
