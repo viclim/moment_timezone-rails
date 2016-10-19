@@ -20,5 +20,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "rails", "~> 3.2"
 
-  spec.add_runtime_dependency "momentjs-rails", "~> 2.10"
+  spec.add_runtime_dependency "momentjs-rails", "~> 2.15.1"
 end
